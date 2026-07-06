@@ -1,0 +1,62 @@
+{
+  "meta": {
+    "exportDate": "2026-07-06T06:50:14.216Z",
+    "exportTool": "frodo",
+    "exportToolVersion": "v3.3.4 [v24.16.0]",
+    "exportedBy": "amadmin",
+    "origin": "http://mybank.com:8080/am",
+    "originAmVersion": "7.5.1"
+  },
+  "script": {
+    "285fc6b5-8838-4b9a-a614-3388d5e8d714": {
+      "_id": "285fc6b5-8838-4b9a-a614-3388d5e8d714",
+      "context": "LIBRARY",
+      "createdBy": "null",
+      "creationDate": 0,
+      "default": false,
+      "description": null,
+      "evaluatorVersion": "2.0",
+      "exports": [
+        {
+          "id": "OUTCOMES",
+          "type": "Object"
+        },
+        {
+          "arity": 0,
+          "id": "createTimer",
+          "type": "Function"
+        },
+        {
+          "arity": 1,
+          "id": "formatTimestamp",
+          "type": "Function"
+        },
+        {
+          "arity": 1,
+          "id": "formatDuration",
+          "type": "Function"
+        },
+        {
+          "arity": 1,
+          "id": "cleanAttributes",
+          "type": "Function"
+        },
+        {
+          "arity": 4,
+          "id": "NodeLogger",
+          "type": "Function"
+        },
+        {
+          "arity": 2,
+          "id": "getHeaderValue",
+          "type": "Function"
+        }
+      ],
+      "language": "JAVASCRIPT",
+      "lastModifiedBy": "null",
+      "lastModifiedDate": 0,
+      "name": "DspUtils",
+      "script": "file://DspUtils.script.js"
+    }
+  }
+}

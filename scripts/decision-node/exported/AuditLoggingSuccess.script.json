@@ -1,0 +1,26 @@
+{
+  "meta": {
+    "exportDate": "2026-07-06T06:50:14.218Z",
+    "exportTool": "frodo",
+    "exportToolVersion": "v3.3.4 [v24.16.0]",
+    "exportedBy": "amadmin",
+    "origin": "http://mybank.com:8080/am",
+    "originAmVersion": "7.5.1"
+  },
+  "script": {
+    "dd560e61-be7d-49b2-973b-52e9b55b5965": {
+      "_id": "dd560e61-be7d-49b2-973b-52e9b55b5965",
+      "context": "AUTHENTICATION_TREE_DECISION_NODE",
+      "createdBy": "null",
+      "creationDate": 0,
+      "default": false,
+      "description": null,
+      "evaluatorVersion": "2.0",
+      "language": "JAVASCRIPT",
+      "lastModifiedBy": "null",
+      "lastModifiedDate": 0,
+      "name": "AuditLoggingSuccess",
+      "script": "file://AuditLoggingSuccess.script.js"
+    }
+  }
+}

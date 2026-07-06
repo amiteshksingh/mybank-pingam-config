@@ -1,0 +1,26 @@
+{
+  "meta": {
+    "exportDate": "2026-07-06T06:50:14.219Z",
+    "exportTool": "frodo",
+    "exportToolVersion": "v3.3.4 [v24.16.0]",
+    "exportedBy": "amadmin",
+    "origin": "http://mybank.com:8080/am",
+    "originAmVersion": "7.5.1"
+  },
+  "script": {
+    "c430a6ff-dc05-40af-aede-98deac92f3de": {
+      "_id": "c430a6ff-dc05-40af-aede-98deac92f3de",
+      "context": "AUTHENTICATION_TREE_DECISION_NODE",
+      "createdBy": "null",
+      "creationDate": 0,
+      "default": false,
+      "description": null,
+      "evaluatorVersion": "1.0",
+      "language": "JAVASCRIPT",
+      "lastModifiedBy": "null",
+      "lastModifiedDate": 0,
+      "name": "reauthPolicy",
+      "script": "file://reauthPolicy.script.js"
+    }
+  }
+}

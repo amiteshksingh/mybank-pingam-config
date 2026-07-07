@@ -33,16 +33,16 @@ set -euo pipefail
 #     ./export-script.sh --help
 #
 #   Export all scripts:
-#     ./export-script.sh mybank /sabi all
+#     ./export-script.sh mybank /alpha all
 #
 #   Export all scripts with explicit cleanup flag:
-#     ./export-script.sh mybank /sabi all --cleanup
+#     ./export-script.sh mybank /alpha all --cleanup
 #
 #   Export single script:
-#     ./export-script.sh mybank /sabi AuditLoggingFailure
+#     ./export-script.sh mybank /alpha AuditLoggingFailure
 #
 #   Export single script with cleanup:
-#     ./export-script.sh mybank /sabi AuditLoggingFailure --cleanup
+#     ./export-script.sh mybank /alpha AuditLoggingFailure --cleanup
 #
 # Notes:
 #   - For "all" exports, cleanup is always performed automatically.
@@ -100,16 +100,16 @@ Usage:
 Examples:
 
   Export all scripts:
-    ./export-script.sh mybank /sabi all
+    ./export-script.sh mybank /alpha all
 
   Export all scripts with explicit cleanup flag:
-    ./export-script.sh mybank /sabi all --cleanup
+    ./export-script.sh mybank /alpha all --cleanup
 
   Export one script:
-    ./export-script.sh mybank /sabi AuditLoggingFailure
+    ./export-script.sh mybank /alpha AuditLoggingFailure
 
   Export one script with cleanup:
-    ./export-script.sh mybank /sabi AuditLoggingFailure --cleanup
+    ./export-script.sh mybank /alpha AuditLoggingFailure --cleanup
 
 Arguments:
 
@@ -119,7 +119,7 @@ Arguments:
 
   realm
     PingAM realm.
-    Example: /sabi
+    Example: /alpha
     Example: /
 
   all|script-name

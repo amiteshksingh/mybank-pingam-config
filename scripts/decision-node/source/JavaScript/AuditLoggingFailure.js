@@ -2,8 +2,8 @@ var userId = nodeState.get("username");
 var userIdentity = idRepository.getIdentity(userId);
 var userAgent = requestHeaders.get("User-Agent");
 //var requestHeaders = requestContext.get("headers");
-logger.error("User userIdentity found: nd tested with FRODO" + userIdentity);
-logger.error("User User-Agent found: " + requestHeaders.get("User-Agent"));
+logger.error("AuditLoggingFailure.js - userId found: " + userId);
+logger.error("AuditLoggingFailure.js - User-Agent found: " + userAgent);
 
 var isIdentityValid = false;
 

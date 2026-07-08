@@ -1,0 +1,37 @@
+@startuml
+
+left to right direction
+skinparam linetype ortho
+skinparam shadowing false
+skinparam state {
+  BackgroundColor White
+  BorderColor Black
+}
+
+state "Failure Audit" as NODE_40cc2537
+state "Data Store Decision" as NODE_7f407298
+state "Success Audit" as NODE_85666e78
+state "Scripted Decision" as NODE_a099b20a
+state "Page Node" as NODE_e06426e4
+[*] --> NODE_e06426e4
+
+NODE_40cc2537 --> [*] : Failure
+NODE_7f407298 --> NODE_a099b20a : False
+NODE_7f407298 --> NODE_85666e78 : True
+NODE_85666e78 --> [*] : Success
+NODE_a099b20a --> NODE_40cc2537 : error
+NODE_a099b20a --> NODE_40cc2537 : true
+NODE_e06426e4 --> NODE_7f407298 : Outcome
+note right of NODE_40cc2537
+Script: AuditLoggingFailure
+end note
+
+note right of NODE_85666e78
+Script: AuditLoggingSuccess
+end note
+
+note right of NODE_a099b20a
+Script: MyNextGenTestScript
+end note
+
+@enduml

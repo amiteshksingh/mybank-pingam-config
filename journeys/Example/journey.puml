@@ -1,0 +1,35 @@
+@startuml
+
+left to right direction
+skinparam linetype ortho
+skinparam shadowing false
+skinparam state {
+  BackgroundColor White
+  BorderColor Black
+}
+
+state "Failure Audit" as NODE_704bc902
+state "Password Collector" as NODE_c4ca4238
+state "Data Store Decision" as NODE_c81e728d
+state "Success Audit" as NODE_c90e64a9
+state "User Name Collector" as NODE_cfcd2084
+state "Zero Page Login Collector" as NODE_eccbc87e
+[*] --> NODE_eccbc87e
+
+NODE_704bc902 --> [*] : Failure
+NODE_c4ca4238 --> NODE_c81e728d : Outcome
+NODE_c81e728d --> NODE_704bc902 : False
+NODE_c81e728d --> NODE_c90e64a9 : True
+NODE_c90e64a9 --> [*] : Success
+NODE_cfcd2084 --> NODE_c4ca4238 : Outcome
+NODE_eccbc87e --> NODE_cfcd2084 : No Credentials
+NODE_eccbc87e --> NODE_c81e728d : Has Credentials
+note right of NODE_704bc902
+Script: AuditLoggingSuccess
+end note
+
+note right of NODE_c90e64a9
+Script: AuditLoggingSuccess
+end note
+
+@enduml

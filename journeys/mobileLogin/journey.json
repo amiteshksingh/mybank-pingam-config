@@ -1,0 +1,263 @@
+{
+  "trees": {
+    "mobileLogin": {
+      "circlesOfTrust": {},
+      "emailTemplates": {},
+      "innerNodes": {
+        "3a1571f3-a176-4f10-bc27-13725bc3acc4": {
+          "_id": "3a1571f3-a176-4f10-bc27-13725bc3acc4",
+          "_outcomes": [
+            {
+              "displayName": "Outcome",
+              "id": "outcome"
+            }
+          ],
+          "_type": {
+            "_id": "PasswordCollectorNode",
+            "collection": true,
+            "name": "Password Collector"
+          }
+        },
+        "6a6cf154-50e8-4e0c-92a0-5c3a11fd1d40": {
+          "_id": "6a6cf154-50e8-4e0c-92a0-5c3a11fd1d40",
+          "_outcomes": [
+            {
+              "displayName": "Outcome",
+              "id": "outcome"
+            }
+          ],
+          "_type": {
+            "_id": "UsernameCollectorNode",
+            "collection": true,
+            "name": "Username Collector"
+          }
+        }
+      },
+      "nodes": {
+        "40cc2537-7f12-4d60-b961-bb84cb10ac4c": {
+          "_id": "40cc2537-7f12-4d60-b961-bb84cb10ac4c",
+          "_outcomes": [
+            {
+              "displayName": "true",
+              "id": "true"
+            }
+          ],
+          "_type": {
+            "_id": "ScriptedDecisionNode",
+            "collection": true,
+            "name": "Scripted Decision"
+          },
+          "inputs": [
+            "*"
+          ],
+          "outcomes": [
+            "true"
+          ],
+          "outputs": [
+            "*",
+            "*"
+          ],
+          "script": "010a0d65-669c-44fc-8718-13efad5ed1bb"
+        },
+        "7f407298-3f15-4490-9b7f-2a1086ecd661": {
+          "_id": "7f407298-3f15-4490-9b7f-2a1086ecd661",
+          "_outcomes": [
+            {
+              "displayName": "True",
+              "id": "true"
+            },
+            {
+              "displayName": "False",
+              "id": "false"
+            }
+          ],
+          "_type": {
+            "_id": "DataStoreDecisionNode",
+            "collection": true,
+            "name": "Data Store Decision"
+          }
+        },
+        "85666e78-18a5-4adf-8b47-65ae90062117": {
+          "_id": "85666e78-18a5-4adf-8b47-65ae90062117",
+          "_outcomes": [
+            {
+              "displayName": "true",
+              "id": "true"
+            }
+          ],
+          "_type": {
+            "_id": "ScriptedDecisionNode",
+            "collection": true,
+            "name": "Scripted Decision"
+          },
+          "inputs": [
+            "*"
+          ],
+          "outcomes": [
+            "true"
+          ],
+          "outputs": [
+            "*"
+          ],
+          "script": "dd560e61-be7d-49b2-973b-52e9b55b5965"
+        },
+        "a099b20a-b084-4d17-884f-b9f2a950a305": {
+          "_id": "a099b20a-b084-4d17-884f-b9f2a950a305",
+          "_outcomes": [
+            {
+              "displayName": "true",
+              "id": "true"
+            },
+            {
+              "displayName": "error",
+              "id": "error"
+            }
+          ],
+          "_type": {
+            "_id": "ScriptedDecisionNode",
+            "collection": true,
+            "name": "Scripted Decision"
+          },
+          "inputs": [
+            "*"
+          ],
+          "outcomes": [
+            "true",
+            "error"
+          ],
+          "outputs": [
+            "*"
+          ],
+          "script": "dd23d00c-ec7c-47cc-b1c5-59840e520ff4"
+        },
+        "e06426e4-f19b-4766-aa92-b6cd0bc8bafb": {
+          "_id": "e06426e4-f19b-4766-aa92-b6cd0bc8bafb",
+          "_outcomes": [
+            {
+              "displayName": "Outcome",
+              "id": "outcome"
+            }
+          ],
+          "_type": {
+            "_id": "PageNode",
+            "collection": true,
+            "name": "Page Node"
+          },
+          "nodes": [
+            {
+              "_id": "6a6cf154-50e8-4e0c-92a0-5c3a11fd1d40",
+              "displayName": "Username Collector",
+              "nodeType": "UsernameCollectorNode"
+            },
+            {
+              "_id": "3a1571f3-a176-4f10-bc27-13725bc3acc4",
+              "displayName": "Password Collector",
+              "nodeType": "PasswordCollectorNode"
+            }
+          ],
+          "pageDescription": {},
+          "pageHeader": {}
+        }
+      },
+      "saml2Entities": {},
+      "scripts": {
+        "010a0d65-669c-44fc-8718-13efad5ed1bb": {
+          "_id": "010a0d65-669c-44fc-8718-13efad5ed1bb",
+          "context": "AUTHENTICATION_TREE_DECISION_NODE",
+          "createdBy": "null",
+          "creationDate": 0,
+          "default": false,
+          "description": "null",
+          "evaluatorVersion": "2.0",
+          "language": "JAVASCRIPT",
+          "lastModifiedBy": "null",
+          "lastModifiedDate": 0,
+          "name": "AuditLoggingFailure",
+          "script": "\"var userId = nodeState.get(\\\"username\\\");\\nvar userIdentity = idRepository.getIdentity(userId);\\nvar userAgent = requestHeaders.get(\\\"User-Agent\\\");\\n//var requestHeaders = requestContext.get(\\\"headers\\\");\\nlogger.error(\\\"AuditLoggingFailure.js - userId found: \\\" + userId);\\nlogger.error(\\\"AuditLoggingFailure.js - User-Agent found: \\\" + userAgent);\\n\\nvar isIdentityValid = false;\\n\\nif (userIdentity) {\\n    try {\\n        // This triggers the internal null pointer check safely\\n        userIdentity.getAttributes(); \\n        isIdentityValid = true;\\n    } catch (e) {\\n        // Catches the Java NullPointerException if the identity wrapper is dead\\n        isIdentityValid = false;\\n    }\\n}\\n\\nif (isIdentityValid){\\n    var emailValues = userIdentity.getAttributeValues(\\\"mail\\\");\\n    var email = (emailValues && emailValues.length > 0) ? emailValues[0] : \\\"not-found\\\";\\n    var status = userIdentity.getAttributeValues(\\\"inetUserStatus\\\");\\n    \\n    logger.error(\\\"User email found: \\\" + email);\\n  logger.error(\\\"User status found: \\\" + status);\\n}\\n\\n    // Simply assign to the variable (do not use withAuditEntryDetail)\\n    auditEntryDetail = {\\n        \\\"eventNameNormalized\\\": \\\"LOGIN_FAILURE\\\",\\n  \\\"successFlag\\\": true,\\n  \\\"outcomeStatus\\\": \\\"FAILURE\\\",\\n  \\\"authMethod\\\": \\\"SMS_OTP\\\",\\n  \\\"browserTrustStatus\\\": \\\"TRUSTED\\\",\\n  \\\"customerRef\\\": \\\"12345\\\",\\n  \\\"serviceId\\\": \\\"RETAIL_BANKING\\\",\\n  \\\"segmentCode\\\": \\\"PREM\\\",\\n  \\\"segmentName\\\": \\\"PREMIUM\\\",\\n  \\\"nationalityCode\\\": \\\"SA\\\",\\n  \\\"nationalityName\\\": \\\"Saudi\\\",\\n  \\\"idType\\\": \\\"NATIONAL_ID\\\",\\n  \\\"idTypeDesc\\\": \\\"National ID\\\",\\n  \\\"journeyStage\\\": \\\"FINAL_AUTH\\\",\\n  \\\"loginStartTsUtc\\\": \\\"2026-06-03T09:12:00Z\\\",\\n  \\\"loginSuccessTsUtc\\\": \\\"2026-06-03T09:12:08Z\\\",\\n  \\\"timeToLoginMs\\\": 8000,\\n      \\\"userStatus\\\": status,\\n      \\\"userAgent\\\": userAgent\\n\\n    };\\n\\n// ALWAYS define an outcome in Next-Gen scripts\\noutcome = \\\"true\\\";\\n\""
+        },
+        "dd23d00c-ec7c-47cc-b1c5-59840e520ff4": {
+          "_id": "dd23d00c-ec7c-47cc-b1c5-59840e520ff4",
+          "context": "AUTHENTICATION_TREE_DECISION_NODE",
+          "createdBy": "null",
+          "creationDate": 0,
+          "default": false,
+          "description": "null",
+          "evaluatorVersion": "2.0",
+          "language": "JAVASCRIPT",
+          "lastModifiedBy": "null",
+          "lastModifiedDate": 0,
+          "name": "MyNextGenTestScript",
+          "script": "\"/*\\n  - Data made available by nodes that have already executed are available in the sharedState variable.\\n  - The script should set outcome to either \\\"true\\\" or \\\"false\\\".\\n */\\n\\n\\n(function () {\\n    var utils = require('DspUtils');\\n    var timer = utils.createTimer();\\n    var NodeLogger = utils.NodeLogger;\\n    var nodeLog = new NodeLogger(logger, \\\"MyNextGenTestScript\\\", \\\"mobileLogin\\\", timer);\\n    var userId = nodeState.get(\\\"username\\\");\\n   \\n    try {\\n        nodeLog.startLogging(\\\"Starting for user: \\\" + userId);\\n        // 1. Get the identity object first\\n\\n        var identity = idRepository.getIdentity(userId);\\n        nodeLog.error(\\\"identity : \\\" + identity);\\n     \\n        // 2. Fetch the attribute (returns a Set/List)\\n        var values = identity.getAttributeValues(\\\"cn\\\");\\n      \\n        // In Next-Gen, this returns a ScriptAttribute or Array\\n        if (values && values.length > 0) {\\n            var rawCn = values[0].toString(); \\n            nodeLog.error(\\\"rawCn : \\\" + rawCn);\\n        }\\n\\n        const cleanStatus = utils.cleanAttributes(rawCn);\\n       \\n\\n        // 1. Get the outcome from the library\\n        const result = utils.OUTCOMES.LOCKED;\\n\\n        // 2. Set shared state for downstream nodes\\n        nodeState.putShared(\\\"Locked\\\", (result === utils.OUTCOMES.LOCKED).toString());\\n\\n        nodeLog.logMetrics(userId, cleanStatus, result);\\n\\n        var userAgentValue = utils.getHeaderValue(requestContext, \\\"User-Agent\\\");\\n\\n    if (userAgent) {\\n        // 3. Save to sharedState for downstream nodes\\n        nodeState.putShared(\\\"incomingUserAgent\\\", userAgentValue);\\n    } else {\\n        sharedState.put(\\\"incomingUserAgent\\\", \\\"unknown\\\");\\n\\n    }\\n      \\n        // 3. Drive the Journey Outcome\\n        // Ensure these outcome names match the \\\"Outcomes\\\" defined in your Node UI\\n        action.goTo(utils.OUTCOMES.TRUE);\\n        nodeLog.error(\\\"Ending in : \\\" + timer.getDuration());\\n        nodeLog.endLogging(\\\" for user: \\\" + userId);\\n\\n    } catch (e) {\\n        nodeLog.error(\\\"Decision failed: \\\" + e.message);\\n        action.goTo(utils.OUTCOMES.ERROR);\\n    }\\n})();\\n\""
+        },
+        "dd560e61-be7d-49b2-973b-52e9b55b5965": {
+          "_id": "dd560e61-be7d-49b2-973b-52e9b55b5965",
+          "context": "AUTHENTICATION_TREE_DECISION_NODE",
+          "createdBy": "null",
+          "creationDate": 0,
+          "default": false,
+          "description": "null",
+          "evaluatorVersion": "2.0",
+          "language": "JAVASCRIPT",
+          "lastModifiedBy": "null",
+          "lastModifiedDate": 0,
+          "name": "AuditLoggingSuccess",
+          "script": "\"var userId = nodeState.get(\\\"username\\\");\\nvar userIdentity = idRepository.getIdentity(userId);\\n\\nif (userIdentity) {\\n    var emailValues = userIdentity.getAttributeValues(\\\"mail\\\");\\n    var email = (emailValues && emailValues.length > 0) ? emailValues[0] : \\\"not-found\\\";\\n    var firstname = userIdentity.getAttributeValues(\\\"givenname\\\");\\n    \\n    logger.error(\\\"User email found: \\\" + email);\\n    logger.error(\\\"User firstname found: \\\" + firstname);\\n\\n    // Simply assign to the variable (do not use withAuditEntryDetail)\\n    auditEntryDetail = {\\n        \\\"eventNameNormalized\\\": \\\"LOGIN_SUCCESS\\\",\\n  \\\"successFlag\\\": true,\\n  \\\"outcomeStatus\\\": \\\"SUCCESS\\\",\\n  \\\"authMethod\\\": \\\"SMS_OTP\\\",\\n  \\\"browserTrustStatus\\\": \\\"TRUSTED\\\",\\n  \\\"customerRef\\\": \\\"12345\\\",\\n  \\\"serviceId\\\": \\\"RETAIL_BANKING\\\",\\n  \\\"segmentCode\\\": \\\"PREM\\\",\\n  \\\"segmentName\\\": \\\"PREMIUM\\\",\\n  \\\"nationalityCode\\\": \\\"SA\\\",\\n  \\\"nationalityName\\\": \\\"Saudi\\\",\\n  \\\"idType\\\": \\\"NATIONAL_ID\\\",\\n  \\\"idTypeDesc\\\": \\\"National ID\\\",\\n  \\\"journeyStage\\\": \\\"FINAL_AUTH\\\",\\n  \\\"loginStartTsUtc\\\": \\\"2026-06-03T09:12:00Z\\\",\\n  \\\"loginSuccessTsUtc\\\": \\\"2026-06-03T09:12:08Z\\\",\\n  \\\"timeToLoginMs\\\": 8000\\n\\n    };\\n}\\n\\n// ALWAYS define an outcome in Next-Gen scripts\\noutcome = \\\"true\\\";\\n\""
+        }
+      },
+      "socialIdentityProviders": {},
+      "themes": [],
+      "tree": {
+        "_id": "mobileLogin",
+        "enabled": true,
+        "entryNodeId": "e06426e4-f19b-4766-aa92-b6cd0bc8bafb",
+        "innerTreeOnly": false,
+        "nodes": {
+          "40cc2537-7f12-4d60-b961-bb84cb10ac4c": {
+            "connections": {
+              "true": "e301438c-0bd0-429c-ab0c-66126501069a"
+            },
+            "displayName": "Failure Audit",
+            "nodeType": "ScriptedDecisionNode"
+          },
+          "7f407298-3f15-4490-9b7f-2a1086ecd661": {
+            "connections": {
+              "false": "a099b20a-b084-4d17-884f-b9f2a950a305",
+              "true": "85666e78-18a5-4adf-8b47-65ae90062117"
+            },
+            "displayName": "Data Store Decision",
+            "nodeType": "DataStoreDecisionNode"
+          },
+          "85666e78-18a5-4adf-8b47-65ae90062117": {
+            "connections": {
+              "true": "70e691a5-1e33-4ac3-a356-e7b6d60d92e0"
+            },
+            "displayName": "Success Audit",
+            "nodeType": "ScriptedDecisionNode"
+          },
+          "a099b20a-b084-4d17-884f-b9f2a950a305": {
+            "connections": {
+              "error": "40cc2537-7f12-4d60-b961-bb84cb10ac4c",
+              "true": "40cc2537-7f12-4d60-b961-bb84cb10ac4c"
+            },
+            "displayName": "Scripted Decision",
+            "nodeType": "ScriptedDecisionNode"
+          },
+          "e06426e4-f19b-4766-aa92-b6cd0bc8bafb": {
+            "connections": {
+              "outcome": "7f407298-3f15-4490-9b7f-2a1086ecd661"
+            },
+            "displayName": "Page Node",
+            "nodeType": "PageNode"
+          }
+        },
+        "staticNodes": {
+          "70e691a5-1e33-4ac3-a356-e7b6d60d92e0": {},
+          "e301438c-0bd0-429c-ab0c-66126501069a": {},
+          "startNode": {}
+        },
+        "uiConfig": {}
+      },
+      "variable": {}
+    }
+  }
+}
